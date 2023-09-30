@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "foundations",
+  "info": {
+    "singularName": "foundation",
+    "pluralName": "foundations",
+    "displayName": "Foundation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "uri": {
+      "type": "string",
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  }
+}
