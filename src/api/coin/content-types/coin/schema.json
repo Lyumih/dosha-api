@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coins",
+  "info": {
+    "singularName": "coin",
+    "pluralName": "coins",
+    "displayName": "Coin",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "coin"
+    },
+    "steps": {
+      "type": "integer",
+      "min": 0,
+      "required": true
+    },
+    "trainings": {
+      "type": "integer",
+      "min": 0,
+      "required": true
+    },
+    "achievements": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "goods": {
+      "type": "integer",
+      "min": 0,
+      "required": true
+    },
+    "charities": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    }
+  }
+}
