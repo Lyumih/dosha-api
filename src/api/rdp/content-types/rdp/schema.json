@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rdps",
+  "info": {
+    "singularName": "rdp",
+    "pluralName": "rdps",
+    "displayName": "rdp"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "test": {
+      "type": "string"
+    }
+  }
+}
