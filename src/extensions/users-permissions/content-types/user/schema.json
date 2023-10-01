@@ -71,6 +71,18 @@
       "relation": "oneToOne",
       "target": "api::coin.coin",
       "inversedBy": "user_id"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "users_id"
+    },
+    "foundation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::foundation.foundation",
+      "inversedBy": "user_id"
     }
   }
 }

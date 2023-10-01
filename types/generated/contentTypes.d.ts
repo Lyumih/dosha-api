@@ -413,23 +413,63 @@ export interface ApiCoinCoin extends Schema.CollectionType {
   };
 }
 
+export interface ApiCompanyCompany extends Schema.CollectionType {
+  collectionName: 'companies';
+  info: {
+    singularName: 'company';
+    pluralName: 'companies';
+    displayName: 'Company';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    company: Attribute.String & Attribute.Required;
+    department: Attribute.String & Attribute.Required;
+    users_id: Attribute.Relation<
+      'api::company.company',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::company.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::company.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFoundationFoundation extends Schema.CollectionType {
   collectionName: 'foundations';
   info: {
     singularName: 'foundation';
     pluralName: 'foundations';
     displayName: 'Foundation';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    uri: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    uri: Attribute.String & Attribute.Required & Attribute.Unique;
     active: Attribute.Boolean & Attribute.DefaultTo<false>;
+    user_id: Attribute.Relation<
+      'api::foundation.foundation',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::foundation.foundation',
       'oneToOne',
@@ -441,28 +481,6 @@ export interface ApiFoundationFoundation extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiRdpRdp extends Schema.CollectionType {
-  collectionName: 'rdps';
-  info: {
-    singularName: 'rdp';
-    pluralName: 'rdps';
-    displayName: 'rdp';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    test: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::rdp.rdp', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::rdp.rdp', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -727,6 +745,16 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToOne',
       'api::coin.coin'
     >;
+    company: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToOne',
+      'api::company.company'
+    >;
+    foundation: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToOne',
+      'api::foundation.foundation'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -799,8 +827,8 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::coin.coin': ApiCoinCoin;
+      'api::company.company': ApiCompanyCompany;
       'api::foundation.foundation': ApiFoundationFoundation;
-      'api::rdp.rdp': ApiRdpRdp;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;

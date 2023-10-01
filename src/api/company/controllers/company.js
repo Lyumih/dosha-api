@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * rdp controller
+ * company controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::rdp.rdp');
+module.exports = createCoreController('api::company.company');

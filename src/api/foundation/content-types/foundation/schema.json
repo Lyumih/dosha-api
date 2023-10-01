@@ -4,25 +4,34 @@
   "info": {
     "singularName": "foundation",
     "pluralName": "foundations",
-    "displayName": "Foundation"
+    "displayName": "Foundation",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "uri": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "active": {
       "type": "boolean",
       "default": false,
       "required": false
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "foundation"
     }
   }
 }
